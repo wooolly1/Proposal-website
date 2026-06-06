@@ -44,7 +44,7 @@ export default function StepDate({ onSelect }: { onSelect: (option: DateOption) 
         <h2 className="text-3xl font-display font-bold text-gray-800 mb-2 leading-tight">
           Let&apos;s go on a date!
         </h2>
-        <p className="text-gray-400 text-xl mb-8 font-medium">
+        <p className="text-gray-400 text-2xl mb-8 font-medium">
           What kind of date would you like? 💕
         </p>
 

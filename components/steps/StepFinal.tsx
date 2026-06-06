@@ -142,7 +142,7 @@ export default function StepFinal({ onNext }: { onNext: () => void }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.6 }}
-            className="text-xl text-gray-600 mb-10 leading-relaxed font-medium"
+            className="text-2xl text-gray-600 mb-10 leading-relaxed font-medium"
           >
             You just made me the happiest person alive.
           </motion.p>
