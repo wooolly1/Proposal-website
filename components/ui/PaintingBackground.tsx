@@ -105,14 +105,11 @@ export const PAINTINGS: Painting[] = [
     motion: 'wave',
     veil: 0.28,
   },
-  // 9 — StepDateConfirm: "It's a date!"
-  // (Temporarily a public painting — swap src back to '/paintings/Herpainting.jpg'
-  //  with title 'His masterpiece 💕' and motion 'sail' to restore his artwork.)
+  // 9 — StepDateConfirm: "It's a date!" — his special painting 💕
   {
-    src: '/paintings/starry-night.jpg',
-    title: 'The Starry Night',
-    artist: 'Vincent van Gogh',
-    motion: 'swirl',
+    src: '/paintings/Herpainting.jpg',
+    title: 'His masterpiece 💕',
+    motion: 'sail',
     veil: 0,
     spotlight: 0.1,
   },
