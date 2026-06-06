@@ -1,5 +1,5 @@
 'use client';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Step1 from '@/components/steps/Step1';
 import Step2 from '@/components/steps/Step2';
@@ -28,6 +28,14 @@ export default function StoryEngine() {
   const [locationChoice, setLocationChoice] = useState<DateOption | null>(null);
   const [dayChoice, setDayChoice] = useState<DateOption | null>(null);
   const [timeChoice, setTimeChoice] = useState<DateOption | null>(null);
+
+  // Android Chrome flickers with backdrop-filter behind animations — flag it
+  // so CSS can disable the blur on Android only.
+  useEffect(() => {
+    if (typeof navigator !== 'undefined' && /android/i.test(navigator.userAgent)) {
+      document.documentElement.classList.add('is-android');
+    }
+  }, []);
 
   const next = useCallback(() => setStep(s => Math.min(s + 1, TOTAL_STEPS - 1)), []);
   const handleYes = useCallback(() => setStep(YAY_STEP), []);
