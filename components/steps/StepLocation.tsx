@@ -37,7 +37,7 @@ export default function StepLocation({ onSelect }: { onSelect: (option: DateOpti
         <h2 className="text-3xl font-display font-bold text-gray-800 mb-2 leading-tight">
           Where should we go?
         </h2>
-        <p className="text-gray-400 text-xl mb-8 font-medium">
+        <p className="text-gray-400 text-2xl mb-8 font-medium">
           Let&apos;s pick the perfect spot! 💕
         </p>
 

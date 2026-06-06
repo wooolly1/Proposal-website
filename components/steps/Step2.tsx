@@ -29,7 +29,7 @@ export default function Step2({ onNext }: { onNext: () => void }) {
         </motion.div>
 
         <div className="min-h-[5rem] flex items-center justify-center mb-10">
-          <p className="text-xl text-gray-600 leading-relaxed font-medium">
+          <p className="text-2xl text-gray-600 leading-relaxed font-medium">
             <TypewriterText
               text="I want you to know how much you mean to me."
               speed={48}

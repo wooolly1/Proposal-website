@@ -42,7 +42,7 @@ export default function Step1({ onNext }: { onNext: () => void }) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="text-xl text-gray-500 mb-10 leading-relaxed"
+          className="text-2xl text-gray-500 mb-10 leading-relaxed"
         >
           I&apos;ve been wanting to tell you something for a while...
         </motion.p>
