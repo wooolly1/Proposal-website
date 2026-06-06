@@ -5,7 +5,13 @@ import PulsingHeart from '@/components/animations/PulsingHeart';
 import Confetti from '@/components/ui/Confetti';
 import type { DateOption } from './StepDate';
 
-export default function StepDateConfirm({ choice }: { choice: DateOption }) {
+export default function StepDateConfirm({
+  choice,
+  location,
+}: {
+  choice: DateOption;
+  location: DateOption;
+}) {
   return (
     <>
       <Confetti count={110} />
@@ -18,16 +24,18 @@ export default function StepDateConfirm({ choice }: { choice: DateOption }) {
         style={{ zIndex: 20 }}
       >
         <GlassCard className="text-center p-12">
-          {/* Chosen date emoji */}
+          {/* Chosen date + location emojis */}
           <motion.div
             initial={{ scale: 0, rotate: -30 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.3, duration: 0.7, type: 'spring', bounce: 0.6 }}
-            className="text-7xl mb-6 block"
+            className="text-6xl mb-6 flex items-center justify-center gap-3"
             role="img"
-            aria-label={choice.label}
+            aria-label={`${choice.label} at ${location.label}`}
           >
-            {choice.emoji}
+            <span>{choice.emoji}</span>
+            <span className="text-3xl text-rose-300">＋</span>
+            <span>{location.emoji}</span>
           </motion.div>
 
           <motion.h1
@@ -49,9 +57,9 @@ export default function StepDateConfirm({ choice }: { choice: DateOption }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.6 }}
-            className="text-xl text-gray-600 mb-10 leading-relaxed font-medium"
+            className="text-xl text-gray-600 mb-8 leading-relaxed font-medium"
           >
-            {choice.label} it is — I can&apos;t wait to spend it with you. 💕
+            A {choice.label.toLowerCase()} at {location.label.toLowerCase()} — I can&apos;t wait to spend it with you. 💕
           </motion.p>
 
           <motion.div
