@@ -24,94 +24,89 @@ export interface Painting {
 }
 
 /**
- * Direct Wikimedia CDN (upload.wikimedia.org) image URLs — the same form
- * Wikipedia itself uses in <img> tags. Loaded by the visitor's browser at
- * runtime (not at build time). If a URL ever fails, that step gracefully
- * falls back to the pink gradient background. To swap a painting, change `src`.
+ * Public-domain paintings, self-hosted from this site's own /public/paintings
+ * folder so they load same-origin (no external host needed). If a file ever
+ * fails to load, that step gracefully falls back to the pink gradient.
+ * To add your own artwork: drop an image in public/paintings and change `src`.
  */
-const CDN = 'https://upload.wikimedia.org/wikipedia/commons/thumb';
-
 export const PAINTINGS: Painting[] = [
   // 0 — Step1: "Hey there"
   {
-    src: `${CDN}/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1600px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg`,
-    title: 'The Birth of Venus',
-    artist: 'Sandro Botticelli',
-    motion: 'float',
-    veil: 0.28,
+    src: '/paintings/wheatfield.jpg',
+    title: 'Wheatfield with Cypresses',
+    artist: 'Vincent van Gogh',
+    motion: 'breathe',
+    veil: 0.26,
   },
   // 1 — Step2: "how much you mean to me"
   {
-    src: `${CDN}/6/68/Vincent_van_Gogh_-_Almond_blossom_-_Google_Art_Project.jpg/1600px-Vincent_van_Gogh_-_Almond_blossom_-_Google_Art_Project.jpg`,
-    title: 'Almond Blossoms',
+    src: '/paintings/starry-night.jpg',
+    title: 'The Starry Night',
     artist: 'Vincent van Gogh',
-    motion: 'breathe',
-    veil: 0.24,
+    motion: 'swirl',
+    veil: 0.3,
   },
   // 2 — Step3: reveal cards
   {
-    src: `${CDN}/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg`,
-    title: 'Mona Lisa',
-    artist: 'Leonardo da Vinci',
-    motion: 'breathe',
-    position: 'center 25%',
-    veil: 0.3,
+    src: '/paintings/great-wave.jpg',
+    title: 'The Great Wave off Kanagawa',
+    artist: 'Katsushika Hokusai',
+    motion: 'wave',
+    veil: 0.28,
   },
   // 3 — Step4: "Can I tell you a secret?"
   {
-    src: `${CDN}/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/1600px-1665_Girl_with_a_Pearl_Earring.jpg`,
-    title: 'Girl with a Pearl Earring',
-    artist: 'Johannes Vermeer',
-    motion: 'breathe',
-    position: 'center 30%',
+    src: '/paintings/shipwreck.jpg',
+    title: 'The Shipwreck',
+    artist: 'J. M. W. Turner',
+    motion: 'drift',
     veil: 0.3,
   },
   // 4 — Step5: "Will you go out with me?"
   {
-    src: `${CDN}/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg`,
-    title: 'The Starry Night',
-    artist: 'Vincent van Gogh',
+    src: '/paintings/udnie.jpg',
+    title: 'Udnie (Young American Girl)',
+    artist: 'Francis Picabia',
     motion: 'swirl',
-    veil: 0.32,
+    veil: 0.3,
   },
   // 5 — StepFinal: "YAYYYYY"
   {
-    src: `${CDN}/f/f3/Gustav_Klimt_016.jpg/1600px-Gustav_Klimt_016.jpg`,
-    title: 'The Kiss',
-    artist: 'Gustav Klimt',
-    motion: 'shimmer',
-    position: 'center 25%',
+    src: '/paintings/starry-night.jpg',
+    title: 'The Starry Night',
+    artist: 'Vincent van Gogh',
+    motion: 'swirl',
     veil: 0.3,
   },
   // 6 — StepDate: "What kind of date?"
   {
-    src: `${CDN}/2/21/Pierre-Auguste_Renoir%2C_Le_Moulin_de_la_Galette.jpg/1600px-Pierre-Auguste_Renoir%2C_Le_Moulin_de_la_Galette.jpg`,
-    title: 'Bal du moulin de la Galette',
-    artist: 'Pierre-Auguste Renoir',
+    src: '/paintings/edtaonisl.jpg',
+    title: 'Edtaonisl (Ecclesiastic)',
+    artist: 'Francis Picabia',
     motion: 'drift',
     veil: 0.3,
   },
   // 7 — StepLocation: "Where should we go?"
   {
-    src: `${CDN}/7/7d/A_Sunday_on_La_Grande_Jatte%2C_Georges_Seurat%2C_1884.jpg/1600px-A_Sunday_on_La_Grande_Jatte%2C_Georges_Seurat%2C_1884.jpg`,
-    title: 'A Sunday on La Grande Jatte',
-    artist: 'Georges Seurat',
-    motion: 'drift',
+    src: '/paintings/the-scream.jpg',
+    title: 'The Scream',
+    artist: 'Edvard Munch',
+    motion: 'breathe',
     veil: 0.3,
   },
   // 8 — StepWhen: "When works for you?"
   {
-    src: `${CDN}/a/a5/Tsunami_by_hokusai_19th_century.jpg/1600px-Tsunami_by_hokusai_19th_century.jpg`,
+    src: '/paintings/great-wave.jpg',
     title: 'The Great Wave off Kanagawa',
     artist: 'Katsushika Hokusai',
     motion: 'wave',
-    veil: 0.3,
+    veil: 0.28,
   },
   // 9 — StepDateConfirm: "It's a date!"
   {
-    src: `${CDN}/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/1600px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg`,
-    title: 'Impression, Sunrise',
-    artist: 'Claude Monet',
+    src: '/paintings/wheatfield.jpg',
+    title: 'Wheatfield with Cypresses',
+    artist: 'Vincent van Gogh',
     motion: 'float',
     veil: 0.26,
   },
