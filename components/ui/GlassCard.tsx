@@ -13,9 +13,9 @@ export default function GlassCard({ children, className = '', noPadding }: Glass
       className={`glass-card ${noPadding ? '' : 'p-8'} ${className}`}
       style={{
         position: 'relative',
-        background: 'rgba(255,255,255,0.28)',
-        backdropFilter: 'blur(28px)',
-        WebkitBackdropFilter: 'blur(28px)',
+        background: 'rgba(255,255,255,0.55)',
+        backdropFilter: 'blur(28px) saturate(1.1)',
+        WebkitBackdropFilter: 'blur(28px) saturate(1.1)',
         border: '1px solid rgba(255,255,255,0.5)',
         borderRadius: '28px',
         boxShadow:
@@ -38,9 +38,9 @@ export function GlassCardAnimated({
     <motion.div
       className={`glass-card p-8 ${className}`}
       style={{
-        background: 'rgba(255,255,255,0.28)',
-        backdropFilter: 'blur(28px)',
-        WebkitBackdropFilter: 'blur(28px)',
+        background: 'rgba(255,255,255,0.55)',
+        backdropFilter: 'blur(28px) saturate(1.1)',
+        WebkitBackdropFilter: 'blur(28px) saturate(1.1)',
         border: '1px solid rgba(255,255,255,0.5)',
         borderRadius: '28px',
         boxShadow:

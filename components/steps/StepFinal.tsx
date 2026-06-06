@@ -79,7 +79,7 @@ const FIREWORK_POSITIONS = [
   { xPct: 28, yPct: 45, delay: 0.5 },
 ];
 
-export default function StepFinal() {
+export default function StepFinal({ onNext }: { onNext: () => void }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -173,6 +173,24 @@ export default function StepFinal() {
                 {e}
               </motion.span>
             ))}
+          </motion.div>
+
+          {/* Continue to date planning */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.1, duration: 0.6 }}
+            className="mt-10"
+          >
+            <motion.button
+              whileHover={{ scale: 1.07, y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={onNext}
+              className="primary-btn text-lg px-10 py-4"
+              aria-label="Continue to plan our date"
+            >
+              Continue 💌
+            </motion.button>
           </motion.div>
         </GlassCard>
       </motion.div>

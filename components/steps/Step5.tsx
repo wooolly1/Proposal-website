@@ -28,8 +28,8 @@ export default function Step5({ onYes }: { onYes: () => void }) {
   const { playSuccess, playNoEscape } = useSound();
 
   const yesScale = Math.min(1 + noAttempts * 0.13, 2.4);
-  const noScale = Math.max(1 - noAttempts * 0.06, 0.45);
-  const noRotation = (noAttempts % 24) * 15;
+  const noScale = Math.max(1 - noAttempts * 0.15, 0.15);
+  const noRotation = (noAttempts % 24) * 25;
 
   const getRandomNoPos = useCallback(() => {
     const container = containerRef.current;
@@ -166,7 +166,7 @@ export default function Step5({ onYes }: { onYes: () => void }) {
               scale: noScale,
               rotate: noRotation,
             }}
-            transition={{ type: 'spring', stiffness: 380, damping: 22 }}
+            transition={{ type: 'spring', stiffness: 700, damping: 16, mass: 0.6 }}
             onMouseEnter={handleNoHover}
             onTouchStart={(e) => { e.preventDefault(); handleNoHover(); }}
             aria-label="No button (try clicking Yes instead!)"
