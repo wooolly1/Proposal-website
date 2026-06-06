@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "story-app",
+      "runtimeExecutable": "/Users/wooolly/.nvm/versions/node/v20.20.2/bin/node",
+      "runtimeArgs": [
+        "/Users/wooolly/Desktop/Claudedesign/story-app/node_modules/.bin/next",
+        "dev",
+        "--turbopack"
+      ],
+      "port": 3002
+    }
+  ]
+}
