@@ -31,7 +31,7 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
         className="w-full max-w-md relative"
         style={{ zIndex: 20 }}
       >
-        <GlassCard className="text-center p-10">
+        <GlassCard transparent className="text-center p-10">
           <motion.div
             initial={{ scale: 0, rotate: -30 }}
             animate={{ scale: 1, rotate: 0 }}
@@ -53,6 +53,7 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
+              filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))',
             }}
           >
             It&apos;s a date! 🎉
@@ -68,16 +69,19 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
                 transition={{ delay: 0.8 + i * 0.15, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="flex items-center gap-3 px-4 py-3 rounded-2xl"
                 style={{
-                  background: 'rgba(255,255,255,0.45)',
-                  border: '1px solid rgba(255,255,255,0.6)',
+                  background: 'rgba(255,255,255,0.7)',
+                  border: '1px solid rgba(255,255,255,0.75)',
+                  backdropFilter: 'blur(6px)',
+                  WebkitBackdropFilter: 'blur(6px)',
+                  boxShadow: '0 4px 14px rgba(0,0,0,0.12)',
                 }}
               >
                 <span className="text-2xl shrink-0" aria-hidden="true">{row.value.emoji}</span>
                 <div className="leading-tight">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-rose-400">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-rose-500">
                     {row.label}
                   </p>
-                  <p className="text-base font-semibold text-gray-700">{row.value.label}</p>
+                  <p className="text-base font-semibold text-gray-800">{row.value.label}</p>
                 </div>
               </motion.div>
             ))}
@@ -87,7 +91,8 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
-            className="text-lg text-gray-600 mb-8 leading-relaxed font-medium"
+            className="text-lg mb-8 leading-relaxed font-semibold text-white"
+            style={{ textShadow: '0 2px 8px rgba(0,0,0,0.55)' }}
           >
             I can&apos;t wait to spend it with you. 💕
           </motion.p>
