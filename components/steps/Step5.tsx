@@ -56,7 +56,7 @@ export default function Step5({ onYes }: { onYes: () => void }) {
       const container = containerRef.current;
       if (!container) return;
       const { width, height } = container.getBoundingClientRect();
-      setNoPos({ x: width / 2 - 55, y: height - 64 });
+      setNoPos({ x: width / 2 - 55, y: height - 52 });
     }, 100);
     return () => clearTimeout(t);
   }, []);
@@ -123,7 +123,7 @@ export default function Step5({ onYes }: { onYes: () => void }) {
         <div
           ref={containerRef}
           className="relative w-full"
-          style={{ height: 210 }}
+          style={{ height: 260 }}
           role="group"
           aria-label="Yes or No buttons"
         >
