@@ -110,8 +110,8 @@ export const PAINTINGS: Painting[] = [
     src: '/paintings/Herpainting.jpg',
     title: 'His masterpiece 💕',
     motion: 'sail',
-    veil: 0.08,
-    spotlight: 0.3,
+    veil: 0,
+    spotlight: 0.1,
   },
 ];
 
