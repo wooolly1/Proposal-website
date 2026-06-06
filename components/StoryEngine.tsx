@@ -16,6 +16,7 @@ import FloatingHearts from '@/components/ui/FloatingHearts';
 import CustomCursor from '@/components/ui/CustomCursor';
 import ProgressIndicator from '@/components/ui/ProgressIndicator';
 import MusicToggle from '@/components/ui/MusicToggle';
+import PaintingBackground, { PAINTINGS } from '@/components/ui/PaintingBackground';
 
 const TOTAL_STEPS = 10;
 const LEAD_UP_STEPS = 5; // steps 0-4 show progress dots
@@ -58,12 +59,15 @@ export default function StoryEngine() {
         }}
       />
 
-      {/* Animated blobs */}
+      {/* Animated blobs — fallback layer beneath the painting */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }} aria-hidden="true">
         <div className="bg-blob bg-blob-1" />
         <div className="bg-blob bg-blob-2" />
         <div className="bg-blob bg-blob-3" />
       </div>
+
+      {/* Famous painting backdrop — one per step, with motion that suits it */}
+      <PaintingBackground painting={PAINTINGS[Math.min(step, PAINTINGS.length - 1)]} />
 
       {/* Grain texture */}
       <div className="grain-overlay" aria-hidden="true" />
