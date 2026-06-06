@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import GlassCard from '@/components/ui/GlassCard';
 import PulsingHeart from '@/components/animations/PulsingHeart';
@@ -23,6 +23,7 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
 
   // Email the date plan as an invitation (fires once when the finale appears).
   const sentRef = useRef(false);
+  const [debugInfo, setDebugInfo] = useState<string>('sending…');
   useEffect(() => {
     if (sentRef.current) return;
     sentRef.current = true;
@@ -41,6 +42,7 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
     fetch('/api/invite', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      cache: 'no-store',
       body: JSON.stringify({
         subject: '💌 She said YES — your date invitation!',
         from_name: 'Your Proposal Website',
@@ -50,8 +52,17 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
         time: `${time.emoji} ${time.label}`,
         message,
       }),
-    }).catch(() => { /* silently ignore — don't disrupt the moment */ });
+    })
+      .then(async (r) => {
+        const j = await r.json().catch(() => ({}));
+        setDebugInfo(`HTTP ${r.status} — ${JSON.stringify(j)}`);
+      })
+      .catch((e) => setDebugInfo(`request failed: ${String(e)}`));
   }, [choice, location, day, time]);
+
+  // Hidden diagnostics: open the site with ?debug=1 to see the email-send result.
+  const showDebug =
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('debug');
 
   return (
     <>
@@ -140,6 +151,26 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
           </motion.div>
         </GlassCard>
       </motion.div>
+
+      {showDebug && (
+        <div
+          style={{
+            position: 'fixed',
+            bottom: 8,
+            left: 8,
+            right: 8,
+            zIndex: 50,
+            background: 'rgba(0,0,0,0.8)',
+            color: '#0f0',
+            font: '12px/1.4 monospace',
+            padding: '8px 10px',
+            borderRadius: 8,
+            wordBreak: 'break-word',
+          }}
+        >
+          invite: {debugInfo}
+        </div>
+      )}
     </>
   );
 }
