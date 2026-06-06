@@ -1,9 +1,14 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import GlassCard from '@/components/ui/GlassCard';
 import PulsingHeart from '@/components/animations/PulsingHeart';
 import Confetti from '@/components/ui/Confetti';
 import type { DateOption } from './StepDate';
+
+// Free Web3Forms access key (tied to the recipient email). Paste the key
+// from https://web3forms.com between the quotes to enable the invitation email.
+const WEB3FORMS_ACCESS_KEY = '';
 
 interface Props {
   choice: DateOption;
@@ -19,6 +24,38 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
     { label: 'When', value: day },
     { label: 'Time', value: time },
   ];
+
+  // Email the date plan as an invitation (fires once when the finale appears).
+  const sentRef = useRef(false);
+  useEffect(() => {
+    if (sentRef.current) return;
+    sentRef.current = true;
+    if (!WEB3FORMS_ACCESS_KEY) return;
+
+    const message =
+      `💕 She said YES! 💕\n\n` +
+      `Here's the date she planned:\n\n` +
+      `${choice.emoji}  What:  ${choice.label}\n` +
+      `${location.emoji}  Where: ${location.label}\n` +
+      `${day.emoji}  When:  ${day.label}\n` +
+      `${time.emoji}  Time:  ${time.label}\n\n` +
+      `"I can't wait to spend it with you." 💌`;
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: '💌 She said YES — your date invitation!',
+        from_name: 'Your Proposal Website',
+        what: `${choice.emoji} ${choice.label}`,
+        where: `${location.emoji} ${location.label}`,
+        when: `${day.emoji} ${day.label}`,
+        time: `${time.emoji} ${time.label}`,
+        message,
+      }),
+    }).catch(() => { /* silently ignore — don't disrupt the moment */ });
+  }, [choice, location, day, time]);
 
   return (
     <>
