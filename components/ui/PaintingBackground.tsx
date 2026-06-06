@@ -22,6 +22,8 @@ export interface Painting {
   position?: string;
   /** White veil opacity (0-1) over the painting for text readability. */
   veil?: number;
+  /** Central spotlight intensity multiplier (0-1, default 1). Lower = painting shows more. */
+  spotlight?: number;
 }
 
 /**
@@ -108,7 +110,8 @@ export const PAINTINGS: Painting[] = [
     src: '/paintings/Herpainting.jpg',
     title: 'His masterpiece 💕',
     motion: 'sail',
-    veil: 0.24,
+    veil: 0.08,
+    spotlight: 0.3,
   },
 ];
 
@@ -140,6 +143,7 @@ const MOTION_DURATION: Record<MotionKind, number> = {
 export default function PaintingBackground({ painting }: { painting: Painting }) {
   const [failedSrcs, setFailedSrcs] = useState<Set<string>>(new Set());
   const failed = failedSrcs.has(painting.src);
+  const spot = painting.spotlight ?? 1;
 
   return (
     <div className="fixed inset-0 overflow-hidden" style={{ zIndex: 2 }} aria-hidden="true">
@@ -183,8 +187,7 @@ export default function PaintingBackground({ painting }: { painting: Painting })
       <div
         className="absolute inset-0"
         style={{
-          background:
-            'radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 78%)',
+          background: `radial-gradient(ellipse at center, rgba(255,255,255,${0.4 * spot}) 0%, rgba(255,255,255,${0.12 * spot}) 50%, rgba(255,255,255,0) 78%)`,
         }}
       />
 
