@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Playfair_Display, Dancing_Script } from 'next/font/google';
+import { Inter, Playfair_Display, Caveat } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
@@ -16,10 +16,10 @@ const playfair = Playfair_Display({
   display: 'swap',
 });
 
-const dancing = Dancing_Script({
+const caveat = Caveat({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-script',
+  variable: '--font-caveat',
   display: 'swap',
 });
 
@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${dancing.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${caveat.variable}`}>
       <body>{children}</body>
     </html>
   );
