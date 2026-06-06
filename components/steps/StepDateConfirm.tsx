@@ -128,7 +128,7 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.6 }}
-            className="text-lg mb-8 leading-relaxed font-semibold text-white"
+            className="text-xl mb-8 leading-relaxed font-semibold text-white"
             style={{ textShadow: '0 2px 8px rgba(0,0,0,0.55)' }}
           >
             I can&apos;t wait to spend it with you. 💕

@@ -92,7 +92,7 @@ export default function StepWhen({ onConfirm }: Props) {
         <h2 className="text-3xl font-display font-bold text-gray-800 mb-2 leading-tight">
           When works for you?
         </h2>
-        <p className="text-gray-400 text-lg mb-7 font-medium">
+        <p className="text-gray-400 text-xl mb-7 font-medium">
           Pick a day and a time 💕
         </p>
 
