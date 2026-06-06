@@ -10,7 +10,8 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-playfair)', 'Georgia', 'serif'],
+        display: ['var(--font-script)', 'var(--font-playfair)', 'cursive'],
+        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
       colors: {
         rose: {
