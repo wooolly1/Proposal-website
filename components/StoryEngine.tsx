@@ -9,6 +9,7 @@ import Step5 from '@/components/steps/Step5';
 import StepFinal from '@/components/steps/StepFinal';
 import StepDate, { DateOption } from '@/components/steps/StepDate';
 import StepLocation from '@/components/steps/StepLocation';
+import StepWhen from '@/components/steps/StepWhen';
 import StepDateConfirm from '@/components/steps/StepDateConfirm';
 import FloatingParticles from '@/components/ui/FloatingParticles';
 import FloatingHearts from '@/components/ui/FloatingHearts';
@@ -16,7 +17,7 @@ import CustomCursor from '@/components/ui/CustomCursor';
 import ProgressIndicator from '@/components/ui/ProgressIndicator';
 import MusicToggle from '@/components/ui/MusicToggle';
 
-const TOTAL_STEPS = 9;
+const TOTAL_STEPS = 10;
 const LEAD_UP_STEPS = 5; // steps 0-4 show progress dots
 const YAY_STEP = 5; // the "YAYYYYY" celebration page
 
@@ -24,6 +25,8 @@ export default function StoryEngine() {
   const [step, setStep] = useState(0);
   const [dateChoice, setDateChoice] = useState<DateOption | null>(null);
   const [locationChoice, setLocationChoice] = useState<DateOption | null>(null);
+  const [dayChoice, setDayChoice] = useState<DateOption | null>(null);
+  const [timeChoice, setTimeChoice] = useState<DateOption | null>(null);
 
   const next = useCallback(() => setStep(s => Math.min(s + 1, TOTAL_STEPS - 1)), []);
   const handleYes = useCallback(() => setStep(YAY_STEP), []);
@@ -34,6 +37,11 @@ export default function StoryEngine() {
   const handleLocationSelect = useCallback((option: DateOption) => {
     setLocationChoice(option);
     setStep(8);
+  }, []);
+  const handleWhenConfirm = useCallback((day: DateOption, time: DateOption) => {
+    setDayChoice(day);
+    setTimeChoice(time);
+    setStep(9);
   }, []);
 
   const isCelebration = step >= YAY_STEP;
@@ -94,8 +102,15 @@ export default function StoryEngine() {
           {step === 5 && <StepFinal key="final" onNext={next} />}
           {step === 6 && <StepDate key="date" onSelect={handleDateSelect} />}
           {step === 7 && <StepLocation key="location" onSelect={handleLocationSelect} />}
-          {step === 8 && dateChoice && locationChoice && (
-            <StepDateConfirm key="confirm" choice={dateChoice} location={locationChoice} />
+          {step === 8 && <StepWhen key="when" onConfirm={handleWhenConfirm} />}
+          {step === 9 && dateChoice && locationChoice && dayChoice && timeChoice && (
+            <StepDateConfirm
+              key="confirm"
+              choice={dateChoice}
+              location={locationChoice}
+              day={dayChoice}
+              time={timeChoice}
+            />
           )}
         </AnimatePresence>
       </main>
