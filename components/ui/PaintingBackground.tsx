@@ -15,7 +15,7 @@ export interface Painting {
   /** Painting image URL (loaded at runtime in the visitor's browser). */
   src: string;
   title: string;
-  artist: string;
+  artist?: string;
   motion: MotionKind;
   /** CSS object-position for framing. */
   position?: string;
@@ -102,13 +102,12 @@ export const PAINTINGS: Painting[] = [
     motion: 'wave',
     veil: 0.28,
   },
-  // 9 — StepDateConfirm: "It's a date!"
+  // 9 — StepDateConfirm: "It's a date!" — her special painting 💕
   {
-    src: '/paintings/wheatfield.jpg',
-    title: 'Wheatfield with Cypresses',
-    artist: 'Vincent van Gogh',
-    motion: 'float',
-    veil: 0.26,
+    src: '/paintings/Herpainting.jpg',
+    title: 'His masterpiece 💕',
+    motion: 'drift',
+    veil: 0.24,
   },
 ];
 
@@ -201,7 +200,9 @@ export default function PaintingBackground({ painting }: { painting: Painting })
             <p className="text-sm font-display font-semibold text-gray-700/90 leading-tight drop-shadow-sm">
               {painting.title}
             </p>
-            <p className="text-xs text-gray-500/90 italic">{painting.artist}</p>
+            {painting.artist && (
+              <p className="text-xs text-gray-500/90 italic">{painting.artist}</p>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
