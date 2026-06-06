@@ -8,7 +8,7 @@ import type { DateOption } from './StepDate';
 
 // Free Web3Forms access key (tied to the recipient email). Paste the key
 // from https://web3forms.com between the quotes to enable the invitation email.
-const WEB3FORMS_ACCESS_KEY = '';
+const WEB3FORMS_ACCESS_KEY = '5a9694c1-f378-462e-bb24-1404f503562b';
 
 interface Props {
   choice: DateOption;
