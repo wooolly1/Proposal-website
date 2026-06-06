@@ -12,7 +12,7 @@ interface GlassCardProps {
 export default function GlassCard({ children, className = '', noPadding, transparent }: GlassCardProps) {
   return (
     <div
-      className={`glass-card ${noPadding ? '' : 'p-8'} ${className}`}
+      className={`glass-card ${transparent ? 'glass-card--transparent' : ''} ${noPadding ? '' : 'p-8'} ${className}`}
       style={{
         position: 'relative',
         background: transparent ? 'transparent' : 'rgba(255,255,255,0.55)',

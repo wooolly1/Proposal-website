@@ -148,6 +148,19 @@
   will-change: transform, opacity;
 }
 
+/* Android fix: backdrop-filter flickers/flashes when content animates behind it
+   on Android Chrome. Disable all backdrop blur on Android and make the glass
+   cards solid-but-translucent instead, so the experience stays stable & readable. */
+html.is-android *,
+html.is-android *::before,
+html.is-android *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+html.is-android .glass-card:not(.glass-card--transparent) {
+  background: rgba(255, 255, 255, 0.86) !important;
+}
+
 /* Focus ring for accessibility */
 .primary-btn:focus-visible {
   outline: 3px solid #fb7185;
