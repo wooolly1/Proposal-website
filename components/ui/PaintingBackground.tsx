@@ -203,11 +203,19 @@ export default function PaintingBackground({ painting }: { painting: Painting })
             className="absolute bottom-5 left-5 text-left select-none"
             style={{ zIndex: 3 }}
           >
-            <p className="text-sm font-display font-semibold text-gray-700/90 leading-tight drop-shadow-sm">
+            <p
+              className="text-sm font-display font-semibold leading-tight text-white"
+              style={{ textShadow: '0 1px 5px rgba(0,0,0,0.6)' }}
+            >
               {painting.title}
             </p>
             {painting.artist && (
-              <p className="text-xs text-gray-500/90 italic">{painting.artist}</p>
+              <p
+                className="text-xs italic text-white/85"
+                style={{ textShadow: '0 1px 4px rgba(0,0,0,0.55)' }}
+              >
+                {painting.artist}
+              </p>
             )}
           </motion.div>
         )}
