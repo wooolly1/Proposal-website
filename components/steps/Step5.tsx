@@ -28,8 +28,8 @@ export default function Step5({ onYes }: { onYes: () => void }) {
   const { playSuccess, playNoEscape } = useSound();
 
   const yesScale = Math.min(1 + noAttempts * 0.13, 2.4);
-  const noScale = Math.max(1 - noAttempts * 0.15, 0.15);
-  const noRotation = (noAttempts % 24) * 25;
+  const noScale = Math.max(1 - noAttempts * 0.1, 0.5);
+  const noRotation = (noAttempts % 24) * 18;
 
   const getRandomNoPos = useCallback(() => {
     const container = containerRef.current;
@@ -51,12 +51,12 @@ export default function Step5({ onYes }: { onYes: () => void }) {
   }, []);
 
   useEffect(() => {
-    // Set initial NO position offset from center
+    // Place NO clearly below the YES button so it's visible from the start
     const t = setTimeout(() => {
       const container = containerRef.current;
       if (!container) return;
-      const { width } = container.getBoundingClientRect();
-      setNoPos({ x: width * 0.62, y: 55 });
+      const { width, height } = container.getBoundingClientRect();
+      setNoPos({ x: width / 2 - 55, y: height - 64 });
     }, 100);
     return () => clearTimeout(t);
   }, []);
@@ -123,7 +123,7 @@ export default function Step5({ onYes }: { onYes: () => void }) {
         <div
           ref={containerRef}
           className="relative w-full"
-          style={{ height: 180 }}
+          style={{ height: 210 }}
           role="group"
           aria-label="Yes or No buttons"
         >
@@ -174,15 +174,15 @@ export default function Step5({ onYes }: { onYes: () => void }) {
               position: 'absolute',
               top: 0,
               left: 0,
-              padding: '10px 22px',
+              padding: '11px 24px',
               borderRadius: 9999,
-              background: 'rgba(200,200,210,0.45)',
+              background: 'rgba(255,255,255,0.8)',
               backdropFilter: 'blur(8px)',
               WebkitBackdropFilter: 'blur(8px)',
-              border: '1px solid rgba(200,200,210,0.4)',
-              color: '#9ca3af',
-              fontWeight: 600,
-              fontSize: 14,
+              border: '1.5px solid rgba(150,150,160,0.55)',
+              color: '#6b7280',
+              fontWeight: 700,
+              fontSize: 15,
               whiteSpace: 'nowrap',
               zIndex: 5,
             }}
