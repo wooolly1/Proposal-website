@@ -9,7 +9,8 @@ export type MotionKind =
   | 'float'
   | 'drift'
   | 'shimmer'
-  | 'wave';
+  | 'wave'
+  | 'sail';
 
 export interface Painting {
   /** Painting image URL (loaded at runtime in the visitor's browser). */
@@ -106,7 +107,7 @@ export const PAINTINGS: Painting[] = [
   {
     src: '/paintings/Herpainting.jpg',
     title: 'His masterpiece 💕',
-    motion: 'drift',
+    motion: 'sail',
     veil: 0.24,
   },
 ];
@@ -122,6 +123,7 @@ const MOTION_VARIANTS: Record<MotionKind, Record<string, number[] | string[]>> =
     filter: ['brightness(1) saturate(1)', 'brightness(1.12) saturate(1.15)', 'brightness(1) saturate(1)'],
   },
   wave: { scale: [1.12, 1.18, 1.12], x: [0, -18, 0], rotate: [0, 1.3, -1.3, 0] },
+  sail: { scale: [1.08, 1.12, 1.08], y: [0, -16, 0], rotate: [0, 0.9, -0.9, 0] },
 };
 
 const MOTION_DURATION: Record<MotionKind, number> = {
@@ -132,6 +134,7 @@ const MOTION_DURATION: Record<MotionKind, number> = {
   drift: 26,
   shimmer: 13,
   wave: 19,
+  sail: 9,
 };
 
 export default function PaintingBackground({ painting }: { painting: Painting }) {
