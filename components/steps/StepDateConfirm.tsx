@@ -34,7 +34,8 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
       `${location.emoji}  Where: ${location.label}\n` +
       `${day.emoji}  When:  ${day.label}\n` +
       `${time.emoji}  Time:  ${time.label}\n\n` +
-      `"I can't wait to spend it with you." 💌`;
+      `"I can't wait to spend it with you." 💌\n\n` +
+      `🗓️ Responded: ${new Date().toLocaleString()}`;
 
     // Send via our own server route so it works even on restrictive networks.
     fetch('/api/invite', {

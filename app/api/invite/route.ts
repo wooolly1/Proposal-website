@@ -12,7 +12,12 @@ export async function POST(req: Request) {
     const res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ access_key: WEB3FORMS_ACCESS_KEY, ...data }),
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        ...data,
+        // Unique per submission so Web3Forms' duplicate-spam filter doesn't drop repeats.
+        submitted_at: new Date().toISOString(),
+      }),
     });
 
     const json = await res.json().catch(() => ({}));
