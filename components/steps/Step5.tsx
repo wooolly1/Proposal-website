@@ -115,7 +115,7 @@ export default function Step5({ onYes }: { onYes: () => void }) {
         <h2 className="text-3xl font-display font-bold text-gray-800 mb-2 leading-tight">
           Will you go out with me?
         </h2>
-        <p className="text-gray-400 text-sm mb-8 font-medium tracking-wide">
+        <p className="text-gray-400 text-lg mb-8 font-medium">
           Choose carefully... 😉
         </p>
 

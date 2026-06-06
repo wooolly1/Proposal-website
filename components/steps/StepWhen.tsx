@@ -92,14 +92,14 @@ export default function StepWhen({ onConfirm }: Props) {
         <h2 className="text-3xl font-display font-bold text-gray-800 mb-2 leading-tight">
           When works for you?
         </h2>
-        <p className="text-gray-400 text-sm mb-7 font-medium tracking-wide">
+        <p className="text-gray-400 text-lg mb-7 font-medium">
           Pick a day and a time 💕
         </p>
 
-        <p className="text-left text-sm font-semibold text-gray-500 mb-2.5">Which day?</p>
+        <p className="text-left text-base font-semibold text-gray-500 mb-2.5">Which day?</p>
         {renderOptions(DAY_OPTIONS, day, setDay)}
 
-        <p className="text-left text-sm font-semibold text-gray-500 mb-2.5 mt-6">What time?</p>
+        <p className="text-left text-base font-semibold text-gray-500 mb-2.5 mt-6">What time?</p>
         {renderOptions(TIME_OPTIONS, time, setTime)}
 
         <AnimatePresence>
