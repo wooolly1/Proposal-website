@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-script)', 'var(--font-playfair)', 'cursive'],
+        sans: ['var(--font-caveat)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-caveat)', 'cursive'],
         serif: ['var(--font-playfair)', 'Georgia', 'serif'],
       },
       colors: {
