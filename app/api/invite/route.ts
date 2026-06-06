@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // Web3Forms access key (kept server-side). The browser posts the date plan to
 // this route; the server (Vercel, unrestricted network) forwards it to
 // Web3Forms so the email sends regardless of the visitor's network.
