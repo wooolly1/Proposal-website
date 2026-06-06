@@ -24,22 +24,17 @@ export interface Painting {
 }
 
 /**
- * Build a stable Wikimedia Commons image URL.
- * Special:FilePath redirects to the current file, so we don't need the hashed path.
- * These are fetched by the visitor's browser at runtime (not at build time).
+ * Direct Wikimedia CDN (upload.wikimedia.org) image URLs — the same form
+ * Wikipedia itself uses in <img> tags. Loaded by the visitor's browser at
+ * runtime (not at build time). If a URL ever fails, that step gracefully
+ * falls back to the pink gradient background. To swap a painting, change `src`.
  */
-const wm = (file: string, width = 1600) =>
-  `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${width}`;
+const CDN = 'https://upload.wikimedia.org/wikipedia/commons/thumb';
 
-/**
- * One public-domain painting per step (indexed by step number).
- * If a URL ever fails to load, that step gracefully falls back to the
- * pink gradient background. To swap a painting, just change `src` below.
- */
 export const PAINTINGS: Painting[] = [
   // 0 — Step1: "Hey there"
   {
-    src: wm('Sandro Botticelli - La nascita di Venere - Google Art Project - edited.jpg'),
+    src: `${CDN}/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1600px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg`,
     title: 'The Birth of Venus',
     artist: 'Sandro Botticelli',
     motion: 'float',
@@ -47,7 +42,7 @@ export const PAINTINGS: Painting[] = [
   },
   // 1 — Step2: "how much you mean to me"
   {
-    src: wm('Vincent van Gogh - Almond blossom - Google Art Project.jpg'),
+    src: `${CDN}/6/68/Vincent_van_Gogh_-_Almond_blossom_-_Google_Art_Project.jpg/1600px-Vincent_van_Gogh_-_Almond_blossom_-_Google_Art_Project.jpg`,
     title: 'Almond Blossoms',
     artist: 'Vincent van Gogh',
     motion: 'breathe',
@@ -55,7 +50,7 @@ export const PAINTINGS: Painting[] = [
   },
   // 2 — Step3: reveal cards
   {
-    src: wm('Mona Lisa, by Leonardo da Vinci, from C2RMF retouched.jpg'),
+    src: `${CDN}/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1600px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg`,
     title: 'Mona Lisa',
     artist: 'Leonardo da Vinci',
     motion: 'breathe',
@@ -64,7 +59,7 @@ export const PAINTINGS: Painting[] = [
   },
   // 3 — Step4: "Can I tell you a secret?"
   {
-    src: wm('1665 Girl with a Pearl Earring.jpg'),
+    src: `${CDN}/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/1600px-1665_Girl_with_a_Pearl_Earring.jpg`,
     title: 'Girl with a Pearl Earring',
     artist: 'Johannes Vermeer',
     motion: 'breathe',
@@ -73,7 +68,7 @@ export const PAINTINGS: Painting[] = [
   },
   // 4 — Step5: "Will you go out with me?"
   {
-    src: wm('Van Gogh - Starry Night - Google Art Project.jpg'),
+    src: `${CDN}/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg`,
     title: 'The Starry Night',
     artist: 'Vincent van Gogh',
     motion: 'swirl',
@@ -81,7 +76,7 @@ export const PAINTINGS: Painting[] = [
   },
   // 5 — StepFinal: "YAYYYYY"
   {
-    src: wm('Gustav Klimt 016.jpg'),
+    src: `${CDN}/f/f3/Gustav_Klimt_016.jpg/1600px-Gustav_Klimt_016.jpg`,
     title: 'The Kiss',
     artist: 'Gustav Klimt',
     motion: 'shimmer',
@@ -90,15 +85,15 @@ export const PAINTINGS: Painting[] = [
   },
   // 6 — StepDate: "What kind of date?"
   {
-    src: wm('Van Gogh - Terrasse des Cafés an der Place du Forum in Arles am Abend1.jpeg'),
-    title: 'Café Terrace at Night',
-    artist: 'Vincent van Gogh',
+    src: `${CDN}/2/21/Pierre-Auguste_Renoir%2C_Le_Moulin_de_la_Galette.jpg/1600px-Pierre-Auguste_Renoir%2C_Le_Moulin_de_la_Galette.jpg`,
+    title: 'Bal du moulin de la Galette',
+    artist: 'Pierre-Auguste Renoir',
     motion: 'drift',
-    veil: 0.32,
+    veil: 0.3,
   },
   // 7 — StepLocation: "Where should we go?"
   {
-    src: wm('A Sunday on La Grande Jatte, Georges Seurat, 1884.jpg'),
+    src: `${CDN}/7/7d/A_Sunday_on_La_Grande_Jatte%2C_Georges_Seurat%2C_1884.jpg/1600px-A_Sunday_on_La_Grande_Jatte%2C_Georges_Seurat%2C_1884.jpg`,
     title: 'A Sunday on La Grande Jatte',
     artist: 'Georges Seurat',
     motion: 'drift',
@@ -106,7 +101,7 @@ export const PAINTINGS: Painting[] = [
   },
   // 8 — StepWhen: "When works for you?"
   {
-    src: wm('Tsunami by hokusai 19th century.jpg'),
+    src: `${CDN}/a/a5/Tsunami_by_hokusai_19th_century.jpg/1600px-Tsunami_by_hokusai_19th_century.jpg`,
     title: 'The Great Wave off Kanagawa',
     artist: 'Katsushika Hokusai',
     motion: 'wave',
@@ -114,11 +109,11 @@ export const PAINTINGS: Painting[] = [
   },
   // 9 — StepDateConfirm: "It's a date!"
   {
-    src: wm('Claude Monet - Water Lilies - 1906, Ryerson.jpg'),
-    title: 'Water Lilies',
+    src: `${CDN}/5/54/Claude_Monet%2C_Impression%2C_soleil_levant.jpg/1600px-Claude_Monet%2C_Impression%2C_soleil_levant.jpg`,
+    title: 'Impression, Sunrise',
     artist: 'Claude Monet',
     motion: 'float',
-    veil: 0.28,
+    veil: 0.26,
   },
 ];
 
