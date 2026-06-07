@@ -6,6 +6,11 @@ import PulsingHeart from '@/components/animations/PulsingHeart';
 import Confetti from '@/components/ui/Confetti';
 import type { DateOption } from './StepDate';
 
+// Public Web3Forms access key. Called directly from the browser because
+// Web3Forms sits behind Cloudflare, which blocks server-side (datacenter)
+// requests — real browsers pass the challenge fine.
+const WEB3FORMS_ACCESS_KEY = '5a9694c1-f378-462e-bb24-1404f503562b';
+
 interface Props {
   choice: DateOption;
   location: DateOption;
@@ -38,12 +43,12 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
       `"I can't wait to spend it with you." 💌\n\n` +
       `🗓️ Responded: ${new Date().toLocaleString()}`;
 
-    // Send via our own server route so it works even on restrictive networks.
-    fetch('/api/invite', {
+    // Send straight from the browser (passes Cloudflare); unique each time.
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      cache: 'no-store',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
         subject: '💌 She said YES — your date invitation!',
         from_name: 'Your Proposal Website',
         what: `${choice.emoji} ${choice.label}`,
@@ -51,6 +56,7 @@ export default function StepDateConfirm({ choice, location, day, time }: Props) 
         when: `${day.emoji} ${day.label}`,
         time: `${time.emoji} ${time.label}`,
         message,
+        submitted_at: new Date().toISOString(),
       }),
     })
       .then(async (r) => {
