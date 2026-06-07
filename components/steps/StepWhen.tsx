@@ -1,73 +1,57 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import GlassCard from '@/components/ui/GlassCard';
 import { useSound } from '@/hooks/useSound';
 import type { DateOption } from './StepDate';
 
-const DAY_OPTIONS: DateOption[] = [
-  { id: 'today', label: 'Today', emoji: '⚡' },
-  { id: 'tomorrow', label: 'Tomorrow', emoji: '🌅' },
-  { id: 'weekend', label: 'This weekend', emoji: '🎈' },
-  { id: 'nextweek', label: 'Next week', emoji: '📆' },
-];
-
-const TIME_OPTIONS: DateOption[] = [
-  { id: 'morning', label: 'Morning', emoji: '☀️' },
-  { id: 'afternoon', label: 'Afternoon', emoji: '🌤️' },
-  { id: 'evening', label: 'Evening', emoji: '🌆' },
-  { id: 'night', label: 'Night', emoji: '🌙' },
-];
-
 interface Props {
   onConfirm: (day: DateOption, time: DateOption) => void;
 }
 
+function formatDate(value: string): string {
+  const d = new Date(`${value}T00:00`);
+  if (Number.isNaN(d.getTime())) return value;
+  return d.toLocaleDateString(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
+
+function formatTime(value: string): string {
+  const [h, m] = value.split(':').map(Number);
+  if (Number.isNaN(h) || Number.isNaN(m)) return value;
+  const d = new Date();
+  d.setHours(h, m, 0, 0);
+  return d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+}
+
+const inputStyle: React.CSSProperties = {
+  fontFamily: 'inherit',
+  fontSize: '1.3rem',
+  width: '100%',
+  padding: '14px 18px',
+  borderRadius: 18,
+  background: 'rgba(255,255,255,0.62)',
+  border: '1.5px solid rgba(255,255,255,0.7)',
+  boxShadow: '0 4px 16px rgba(251,113,133,0.12)',
+  color: '#374151',
+  outline: 'none',
+};
+
 export default function StepWhen({ onConfirm }: Props) {
-  const [day, setDay] = useState<DateOption | null>(null);
-  const [time, setTime] = useState<DateOption | null>(null);
-  const { playClick, playHover, playSuccess } = useSound();
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [today, setToday] = useState('');
+  const { playClick, playSuccess } = useSound();
 
-  const ready = day !== null && time !== null;
+  useEffect(() => {
+    setToday(new Date().toISOString().split('T')[0]);
+  }, []);
 
-  const renderOptions = (
-    options: DateOption[],
-    selected: DateOption | null,
-    onPick: (o: DateOption) => void,
-  ) => (
-    <div className="grid grid-cols-2 gap-2.5">
-      {options.map((opt, i) => {
-        const isActive = selected?.id === opt.id;
-        return (
-          <motion.button
-            key={opt.id}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 + i * 0.06, duration: 0.4 }}
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
-            onMouseEnter={playHover}
-            onClick={() => { playClick(); onPick(opt); }}
-            className="flex items-center justify-center gap-2 px-3 py-3 rounded-2xl transition-colors"
-            style={{
-              background: isActive ? 'rgba(251,113,133,0.22)' : 'rgba(255,255,255,0.45)',
-              border: isActive
-                ? '1.5px solid rgba(244,63,94,0.6)'
-                : '1px solid rgba(255,255,255,0.6)',
-              boxShadow: isActive
-                ? '0 6px 18px rgba(251,113,133,0.25)'
-                : '0 4px 16px rgba(251,113,133,0.10)',
-            }}
-            aria-pressed={isActive}
-            aria-label={opt.label}
-          >
-            <span className="text-xl" aria-hidden="true">{opt.emoji}</span>
-            <span className="text-sm font-semibold text-gray-700 leading-tight">{opt.label}</span>
-          </motion.button>
-        );
-      })}
-    </div>
-  );
+  const ready = date !== '' && time !== '';
 
   return (
     <motion.div
@@ -93,14 +77,37 @@ export default function StepWhen({ onConfirm }: Props) {
           When works for you?
         </h2>
         <p className="text-gray-400 text-2xl mb-7 font-medium">
-          Pick a day and a time 💕
+          Pick a date and a time 💕
         </p>
 
-        <p className="text-left text-base font-semibold text-gray-500 mb-2.5">Which day?</p>
-        {renderOptions(DAY_OPTIONS, day, setDay)}
+        {/* Date picker */}
+        <div className="text-left mb-5">
+          <label htmlFor="date-input" className="block text-base font-semibold text-gray-500 mb-2">
+            Which day? 📅
+          </label>
+          <input
+            id="date-input"
+            type="date"
+            min={today || undefined}
+            value={date}
+            onChange={(e) => { playClick(); setDate(e.target.value); }}
+            style={inputStyle}
+          />
+        </div>
 
-        <p className="text-left text-base font-semibold text-gray-500 mb-2.5 mt-6">What time?</p>
-        {renderOptions(TIME_OPTIONS, time, setTime)}
+        {/* Time picker (hours & minutes) */}
+        <div className="text-left">
+          <label htmlFor="time-input" className="block text-base font-semibold text-gray-500 mb-2">
+            What time? ⏰
+          </label>
+          <input
+            id="time-input"
+            type="time"
+            value={time}
+            onChange={(e) => { playClick(); setTime(e.target.value); }}
+            style={inputStyle}
+          />
+        </div>
 
         <AnimatePresence>
           {ready && (
@@ -114,7 +121,13 @@ export default function StepWhen({ onConfirm }: Props) {
               <motion.button
                 whileHover={{ scale: 1.06, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => { playSuccess(); onConfirm(day!, time!); }}
+                onClick={() => {
+                  playSuccess();
+                  onConfirm(
+                    { id: date, label: formatDate(date), emoji: '📅' },
+                    { id: time, label: formatTime(time), emoji: '⏰' },
+                  );
+                }}
                 className="primary-btn text-lg px-10 py-4"
                 aria-label="Lock in the date"
               >
